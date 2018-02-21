@@ -30,13 +30,16 @@ class Board
 
   def make_move(start_pos, current_player_name)
     num_of_stones = @cups[start_pos].length
-    count = 0
+    count = 1
 
 
     @cups[start_pos] = []
-
-    while count < num_of_stones
-      ending_cup_idx = (start_pos + 1 + count)% 12
+    debugger
+    while count <= num_of_stones
+      ending_cup_idx = start_pos + count
+      #reset the cup index once it goes over one circle
+      # line 39 set ending_cup_idx again line 42 is useless once comes to the loop again 
+      ending_cup_idx = 0 if ending_cup_idx == 14
       if ending_cup_idx == 6
         @cups[6] << :stone if current_player_name == @name1
       elsif ending_cup_idx == 13
@@ -97,4 +100,4 @@ end
 
 
   p board = Board.new("a","b")
-  p board.make_move(0,'a')
+  p board.make_move(12,'a')
