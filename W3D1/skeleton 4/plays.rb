@@ -1,8 +1,9 @@
 require 'sqlite3'
 require 'singleton'
+require "byebug"
 
 class PlayDBConnection < SQLite3::Database
-  include Singleton
+  include Singleton # create only one instance of the database
 
   def initialize
     super('plays.db')
@@ -15,11 +16,12 @@ class Play
   attr_accessor :title, :year, :playwright_id
 
   def self.all
-    data = PlayDBConnection.instance.execute("SELECT * FROM plays")
+    data = PlayDBConnection.instance.execute("SELECT * FROM plays") #use instance because I require singleton 
+    p data # use debug to see the data type . [{},{}]
     data.map { |datum| Play.new(datum) }
   end
 
-  def initialize(options)
+  def initialize(options) #because the database gave an hash ????
     @id = options['id']
     @title = options['title']
     @year = options['year']
@@ -49,7 +51,7 @@ class Play
     SQL
   end
 
-  def self.find_by_title(title)
+  def self.find_by_title(title) # class method. return new instance.
      result = PlayDBConnection.instance.execute(<<-SQL,title)
       SELECT
        *
