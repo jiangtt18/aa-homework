@@ -1,0 +1,8 @@
+<h1>TingTing's Cats</h1>
+
+<% @cats.each do |cat| %>
+<ul>
+<%=  cat.name %>
+<%= link_to "Show", cat %>
+</ul>
+<% end %>

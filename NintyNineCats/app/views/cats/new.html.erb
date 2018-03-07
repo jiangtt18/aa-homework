@@ -1,0 +1,41 @@
+
+
+<h1> Adopted a New Cat </h1>
+<form action="/cats" method= "post">
+  <br>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]">
+  <br>
+  <!-- #set a nested key cat to store other keys -->
+  <br>
+  <label for="male">M</label>
+  <input id="male" name="cat[sex]" type="radio" value="M" />
+  <label for="female">F</label>
+  <input id="female" name="cat[sex]" type="radio" value="F"/>
+  <br>
+
+  <br>
+  <label for="color">Color</label>
+  <select id="color" name="cat[color]">
+    <option disabled>--Please Select--</option>
+    <%= @colors.each do|color| %>
+
+    <option value="<%=color%>"><%=color%></option>
+    <%end%>
+    <!-- <option value="grey">grey</option>
+    <option value="black">black</option>
+    <option value="yellow">yellow</option> -->
+  </select>
+  <br>
+
+  <br>
+  <label for="bday">Bithday</label>
+  <input id="bday" type="date" name="cat[birth_date]">
+  <br>
+
+  <br>
+  <label for="description">Description</label>
+  <textarea id="description" name="cat[description]" rows="8" cols="80"></textarea>
+  <input type="submit" value="Add to my collection">
+
+</form>
